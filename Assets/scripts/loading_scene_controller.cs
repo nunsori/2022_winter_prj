@@ -102,6 +102,8 @@ public class loading_scene_controller : MonoBehaviour
 
         wait_time(1f);
         */
+
+
         //generate loading scene
         gameObject.SetActive(true);
         

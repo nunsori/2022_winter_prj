@@ -10,7 +10,7 @@ public class camera_zoom : MonoBehaviour
 
     // Start is called before the first frame update
     //화면비율 맞춰서 확대, 축소 해주는 함수
-    void Start()
+    void Update()
     {
         //adjust obj size by ratio
         set_Ratio.set_ratio();

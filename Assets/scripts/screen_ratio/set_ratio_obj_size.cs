@@ -30,7 +30,7 @@ public class set_ratio_obj_size : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //set_ratio();
+        set_ratio();
     }
 
 
