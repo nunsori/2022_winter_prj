@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class item_data : ScriptableObject
 {
+    public int code;
+
     public string item_name;
 
     public string character_name;
@@ -13,8 +15,17 @@ public class item_data : ScriptableObject
 
     public string[] character_script;
 
-    public GameObject character_prefab;
+    public GameObject _prefab;
 
     //static이 붙은거는 json에 저장 안됨! 따라서 스터디 때와 같은방식 으로 구현해도 됨
+
+    public static string[] item_name_set = { "1", "2", "3" };
+    public static string[] character_name_set = { "c1", "c2", "c3" };
+    
+    public item_data(int code)
+    {
+        this.item_name = item_name_set[code];
+        this.character_name = character_name_set[code];
+    }
 }
 

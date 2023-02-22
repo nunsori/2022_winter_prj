@@ -45,10 +45,10 @@ public class set_ratio_obj_size : MonoBehaviour
         temp_vector.z = 1;
 
         //adjust ratio of this obj
-        gameObject.transform.localScale = temp_vector;
+        //gameObject.transform.localScale = temp_vector;
 
 
         //adjust background scale
-        background.transform.localScale = gameObject.transform.localScale;
+        //background.transform.localScale = gameObject.transform.localScale;
     }
 }
