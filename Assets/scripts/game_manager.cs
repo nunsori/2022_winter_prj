@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class game_manager : MonoBehaviour
 {
@@ -46,6 +47,29 @@ public class game_manager : MonoBehaviour
     [SerializeField]
     private GameObject[] ui_obj;
 
+
+
+
+    //creation panel 관련 변수
+
+    [SerializeField]
+    public Button creation_start_btn;
+    [SerializeField]
+    public GameObject[] creation_table_slots;
+
+
+    [SerializeField]
+    private GameObject slot_parent;
+    private GameObject[] creation_inventory_slots;
+
+    [SerializeField]
+    public GameObject slot_pref;
+    [SerializeField]
+    public GameObject item_obj_pref;
+
+
+
+
     private void Awake()
     {
         //singleton
@@ -67,7 +91,11 @@ public class game_manager : MonoBehaviour
         //data loading
         load_data();
 
-        //call json
+        //create item obj
+        for(int i =0; i<play_data.item_Datas.Length; i++)
+        {
+            creation_inventory_slots[i] = Instantiate(slot_pref, slot_parent.transform);
+        }
 
     }
 
@@ -112,6 +140,10 @@ public class game_manager : MonoBehaviour
             File.Create(data_path + data_file_name);
 
             Debug.Log("data_json created");
+
+            play_data = new player_data();
+
+            save();
         }
         else //else data file exist
         {
@@ -132,14 +164,17 @@ public class game_manager : MonoBehaviour
                 //ui_animation_arr[]
                 StartCoroutine(set_active_delay(ui_obj[0], ui_animation_clips[0 * 2].length, false, 0));
                 //ui set active 와 기본 설정
-                //only_one_arr_actvie(1, ui_obj);
-                //ui_animation_arr[1].SetFloat("speed", 1f);
+                
 
 
                 //ui animation 재생
                 ui_animation_arr[1].Play("creation_panel_in");
 
                 StartCoroutine(set_active_delay(ui_obj[1], ui_animation_clips[1 * 2 + 1].length, true, 1));
+
+
+                //ui 기본 세팅 실행
+                check_creation_btn_interactive();
 
 
                 break;
@@ -230,6 +265,20 @@ public class game_manager : MonoBehaviour
     {
         //??
         ui_animation_arr[n].Play(ui_animation_name[n]);
+    }
+
+
+    public void check_creation_btn_interactive()
+    {
+        creation_start_btn.interactable = true;
+
+        for(int i =0; i<creation_table_slots.Length; i++)
+        {
+            if (creation_table_slots[i].transform.GetChild(0) == null)
+            {
+                creation_start_btn.interactable = false;
+            }
+        }
     }
 
 

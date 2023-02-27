@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 //작동되게 하려면 main camera에  Physics 2D Raycaster 혹은 3d일경우 Physics Raycaster 추가해서 하면 작동함
 
@@ -16,10 +17,25 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     private Vector3 temp_vec3 = Vector3.zero;
     private RectTransform rectTransform;
+    private Image img;
+
+    private static Sprite[] item_sprites;
+    public item_data item_Data;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        //item 스프라이트 로드
+        if (item_sprites == null)
+            item_sprites = Resources.LoadAll<Sprite>("items");
+
+
+        //item obj 이미지 설정
+        img = gameObject.GetComponent<Image>();
+        img.sprite = item_sprites[item_Data.code];
+
+
         rectTransform = gameObject.GetComponent<RectTransform>();
         origin_parent = rectTransform.parent.gameObject;
     }
@@ -69,6 +85,11 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             rectTransform.SetParent(enter_slot.GetComponent<RectTransform>());
             rectTransform.localPosition = Vector3.zero;
             origin_parent = rectTransform.parent.gameObject;
+
+            //check is creation true
+            game_manager.Instance.check_creation_btn_interactive();
+
+            //here...
         }
 
         drag_parent.GetComponent<CanvasGroup>().blocksRaycasts = true;
