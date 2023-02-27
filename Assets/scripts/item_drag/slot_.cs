@@ -24,14 +24,14 @@ public class slot_ : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     {
         //throw new System.NotImplementedException();
         item_drag.enter_slot = gameObject;
-        Debug.Log(item_drag.enter_slot);
+        //Debug.Log(item_drag.enter_slot);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //throw new System.NotImplementedException();
         item_drag.enter_slot = null;
-        Debug.Log(item_drag.enter_slot);
+        //Debug.Log(item_drag.enter_slot);
     }
 
     public void OnDrop(PointerEventData eventData)

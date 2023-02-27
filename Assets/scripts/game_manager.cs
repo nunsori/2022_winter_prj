@@ -52,6 +52,7 @@ public class game_manager : MonoBehaviour
 
     //creation panel 관련 변수
 
+    /*
     [SerializeField]
     public Button creation_start_btn;
     [SerializeField]
@@ -65,7 +66,7 @@ public class game_manager : MonoBehaviour
     [SerializeField]
     public GameObject slot_pref;
     [SerializeField]
-    public GameObject item_obj_pref;
+    public GameObject item_obj_pref;*/
 
 
 
@@ -91,11 +92,20 @@ public class game_manager : MonoBehaviour
         //data loading
         load_data();
 
-        //create item obj
+        //create slot and item obj
+
+        creation_controller.Instance.create_item_obj();
+        /*
         for(int i =0; i<play_data.item_Datas.Length; i++)
         {
             creation_inventory_slots[i] = Instantiate(slot_pref, slot_parent.transform);
-        }
+            if (play_data.item_Datas[i] != null)
+            {
+                Instantiate(play_data.item_Datas[i], creation_inventory_slots[i].transform);
+            }
+        }*/
+
+
 
     }
 
@@ -116,7 +126,14 @@ public class game_manager : MonoBehaviour
 
     public void save()
     {
-        data_string_temp = JsonUtility.ToJson(play_data);
+        data_string_temp = JsonUtility.ToJson(play_data,true);
+        Debug.Log(data_string_temp);
+        /*
+        using(var stream = new FileStream(data_path+data_file_name,FileMode.CreateNew, FileAccess.Write, FileShare.Write))
+        using(var writer = new StreamWriter(stream))
+        {
+            File.WriteAllText(data_path + data_file_name, data_string_temp);
+        }*/
         File.WriteAllText(data_path + data_file_name, data_string_temp);
     }
 
@@ -137,11 +154,13 @@ public class game_manager : MonoBehaviour
         if (!File.Exists(data_path + data_file_name))
         {
             //make data file
-            File.Create(data_path + data_file_name);
+            FileStream temp = File.Create(data_path + data_file_name);
 
             Debug.Log("data_json created");
 
             play_data = new player_data();
+
+            temp.Close();
 
             save();
         }
@@ -174,7 +193,7 @@ public class game_manager : MonoBehaviour
 
 
                 //ui 기본 세팅 실행
-                check_creation_btn_interactive();
+                creation_controller.Instance.check_creation_btn_interactive();
 
 
                 break;
@@ -268,6 +287,7 @@ public class game_manager : MonoBehaviour
     }
 
 
+    /*
     public void check_creation_btn_interactive()
     {
         creation_start_btn.interactable = true;
@@ -279,7 +299,7 @@ public class game_manager : MonoBehaviour
                 creation_start_btn.interactable = false;
             }
         }
-    }
+    }*/
 
 
     public IEnumerator set_active_delay(GameObject obj, float delay, bool is_true, int index)

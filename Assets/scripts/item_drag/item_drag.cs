@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //작동되게 하려면 main camera에  Physics 2D Raycaster 혹은 3d일경우 Physics Raycaster 추가해서 하면 작동함
 
 
-public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler,IPointerClickHandler
 {
 
     public GameObject drag_parent;
@@ -19,8 +19,11 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     private RectTransform rectTransform;
     private Image img;
 
-    private static Sprite[] item_sprites;
+    public static Sprite[] item_sprites;
     public item_data item_Data;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,8 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
         rectTransform = gameObject.GetComponent<RectTransform>();
         origin_parent = rectTransform.parent.gameObject;
+
+        drag_parent = gameObject.transform.parent.parent.parent.parent.parent.parent.Find("drag_panel").gameObject;
     }
 
     // Update is called once per frame
@@ -77,17 +82,37 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
         if(enter_slot == null)
         {
+            Debug.Log("111111");
             rectTransform.SetParent(origin_parent.GetComponent<RectTransform>());
             rectTransform.localPosition = Vector3.zero;
         }
         else
         {
-            rectTransform.SetParent(enter_slot.GetComponent<RectTransform>());
-            rectTransform.localPosition = Vector3.zero;
-            origin_parent = rectTransform.parent.gameObject;
+            if(enter_slot.GetComponent<RectTransform>().childCount == 0)
+            {
+                Debug.Log("222222");
+                rectTransform.SetParent(enter_slot.GetComponent<RectTransform>());
+                rectTransform.localPosition = Vector3.zero;
+                origin_parent = rectTransform.parent.gameObject;
+            }
+            else
+            {
+                //return;
+                Debug.Log("333333");
+                //change obj
+                enter_slot.transform.GetChild(0).SetParent(origin_parent.transform);
+                origin_parent.transform.GetChild(0).transform.localPosition = Vector3.zero;
+                origin_parent.transform.GetChild(0).GetComponent<item_drag>().origin_parent = origin_parent;
+
+                rectTransform.SetParent(enter_slot.GetComponent<RectTransform>());
+                rectTransform.localPosition = Vector3.zero;
+                origin_parent = rectTransform.parent.gameObject;
+
+            }
+            
 
             //check is creation true
-            game_manager.Instance.check_creation_btn_interactive();
+            creation_controller.Instance.check_creation_btn_interactive();
 
             //here...
         }
@@ -95,5 +120,12 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         drag_parent.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
         //throw new System.NotImplementedException();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        //throw new System.NotImplementedException();
+        Debug.Log("open popup");
+        creation_controller.Instance.open_popup(item_Data);
     }
 }
