@@ -104,7 +104,7 @@ public class conquer_ctrl : MonoBehaviour
 
         for (int i = 0; i < planet_uis.Length; i++)
         {
-            if (planet_codes[i] >= 0)
+            if (planet_codes[i] >= 0 && planet_codes[i] < data_pool.planetNum)
             {
                 sprite = data_pool.planet_Datas[planet_codes[i]].sprite;
 
@@ -207,7 +207,7 @@ public class conquer_ctrl : MonoBehaviour
     }
 
     /// <summary>
-    /// 패널 변경 애니메이션 마지막에 호출되는 함수
+    /// 패널 변경 애니메이션 마지막r에 호출되는 함수
     /// </summary>
     public void EndSwitchContent()
     {
