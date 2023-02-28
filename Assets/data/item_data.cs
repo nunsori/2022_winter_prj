@@ -8,6 +8,8 @@ public class item_data
 {
     public int code;
 
+    public int char_code;
+
     public string item_name;
 
     public string character_name;
@@ -23,13 +25,16 @@ public class item_data
     public static string[] item_name_set =
         {"temp" ,"혼돈의 권능", "짐승", "죽음의 축복","불사의 축복","지옥초","다크 다이아몬드"
             ,"생명의 축복","꺼지지 않는 불","장염한 대지의 토양","솟구치는 영원수"};
-    public static string[] character_name_set = { "c1", "c2", "c3" };
+    public static string[] character_name_set = { "temp","c1", "c2", "c3","c4","c5","c6"};
 
 
 
-    private static int[,] combination_arr = new int[,] 
+    public static int[,] combination_arr = new int[,] 
     { {1,2,3 },{1,2,4 },{1,2,5 }
      ,{4,8,7 },{4,10,7 },{4,9,6 } };
+
+
+    public static int[] combination_result_arr = {1,2,3,4,5,6 };
 
 
     public item_data(int code2, bool is_character)
@@ -38,15 +43,18 @@ public class item_data
         {
             //character의 경우
             this.character_name = character_name_set[code2];
+
+            this.char_code = code2;
         }
         else
         {
             //item의 경우
             
             this.item_name = item_name_set[code2];
+            this.code = code2;
         }
 
-        this.code = code2;
+        
         
         
     }

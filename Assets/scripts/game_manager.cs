@@ -115,6 +115,9 @@ public class game_manager : MonoBehaviour
     {
         //get_animation component
         //ui_animation_arr[0] = down
+        
+        
+        
         only_one_arr_actvie(0, ui_obj);
     }
 

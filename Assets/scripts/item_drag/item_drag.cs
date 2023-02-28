@@ -22,6 +22,8 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public static Sprite[] item_sprites;
     public item_data item_Data;
 
+    public static Sprite[] char_sprites;
+
 
 
 
@@ -32,6 +34,10 @@ public class item_drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         //item 스프라이트 로드
         if (item_sprites == null)
             item_sprites = Resources.LoadAll<Sprite>("items");
+
+        //char 스프라이트 로드
+        if (char_sprites == null)
+            char_sprites = Resources.LoadAll<Sprite>("character_portraits");
 
 
         //item obj 이미지 설정

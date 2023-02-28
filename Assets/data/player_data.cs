@@ -23,11 +23,15 @@ public class player_data
         basic_chaos_crystal = 1000;
 
         item_Datas = new item_data[4];
+        character_Datas = new item_data[4];
 
-        item_Datas[0] = new item_data(1, false);
-        item_Datas[1] = new item_data(2, false);
-        item_Datas[2] = new item_data(3, false);
-        item_Datas[3] = new item_data(4, false);
+        item_datas_pivot = 0;
+        character_datas_pivot = 0;
+
+        item_Datas[item_datas_pivot++] = new item_data(1, false);
+        item_Datas[item_datas_pivot++] = new item_data(2, false);
+        item_Datas[item_datas_pivot++] = new item_data(3, false);
+        item_Datas[item_datas_pivot++] = new item_data(4, false);
 
         item_datas_pivot = 0;
         character_datas_pivot = 0;
