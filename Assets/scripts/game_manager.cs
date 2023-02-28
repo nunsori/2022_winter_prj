@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class game_manager : MonoBehaviour
 {
     public static game_manager Instance;
+    public neglect_ctrl neglect_ctrl;
 
     [Header("data_file")]
     //data_set
@@ -46,6 +48,11 @@ public class game_manager : MonoBehaviour
     [SerializeField]
     private GameObject[] ui_obj;
 
+    private void OnApplicationQuit()
+    {
+        save();
+    }
+
     private void Awake()
     {
         //singleton
@@ -53,6 +60,9 @@ public class game_manager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
+
+            neglect_ctrl.Calculate_PastTime();
+            neglect_ctrl.Start_Neglect();
         }
         else
         {
@@ -88,6 +98,7 @@ public class game_manager : MonoBehaviour
 
     public void save()
     {
+        play_data.closeDate = DateTime.UtcNow.ToString();
         data_string_temp = JsonUtility.ToJson(play_data);
         File.WriteAllText(data_path + data_file_name, data_string_temp);
     }
