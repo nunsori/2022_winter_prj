@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using System.IO;
 using System;
 
@@ -8,6 +9,7 @@ public class game_manager : MonoBehaviour
 {
     public static game_manager Instance;
     public neglect_ctrl neglect_ctrl;
+    [SerializeField] private TMP_Text goldText;
 
     [Header("data_file")]
     //data_set
@@ -17,6 +19,7 @@ public class game_manager : MonoBehaviour
 
     //to json 함수에 넣을 데이터 이 데이터가 json으로 된다.
     public static player_data play_data;
+    public static player_stat play_stat;
 
 
     //data string temp 데이터 저장 전, to json으로 나오는거 받는 용도
@@ -50,7 +53,10 @@ public class game_manager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        play_data.closeDate = DateTime.UtcNow.ToString();
         save();
+
+        Debug.Log("데이터 저장 | UTC 시간 : " + play_data.closeDate);
     }
 
     private void Awake()
@@ -60,9 +66,6 @@ public class game_manager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
-
-            neglect_ctrl.Calculate_PastTime();
-            neglect_ctrl.Start_Neglect();
         }
         else
         {
@@ -81,6 +84,10 @@ public class game_manager : MonoBehaviour
 
     }
 
+    public void SetMainUI()
+    {
+        goldText.text = play_data.basic_chaos_fragments.ToString();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +95,11 @@ public class game_manager : MonoBehaviour
         //get_animation component
         //ui_animation_arr[0] = down
         only_one_arr_actvie(0, ui_obj);
+
+        play_stat = new player_stat();
+        play_stat.SetData();
+        neglect_ctrl.Calculate_PastTime();
+        neglect_ctrl.Start_Neglect();
     }
 
     // Update is called once per frame
@@ -98,7 +110,6 @@ public class game_manager : MonoBehaviour
 
     public void save()
     {
-        play_data.closeDate = DateTime.UtcNow.ToString();
         data_string_temp = JsonUtility.ToJson(play_data);
         File.WriteAllText(data_path + data_file_name, data_string_temp);
     }
@@ -121,6 +132,8 @@ public class game_manager : MonoBehaviour
         {
             //make data file
             File.Create(data_path + data_file_name);
+            play_data = new player_data();
+            save();
 
             Debug.Log("data_json created");
         }

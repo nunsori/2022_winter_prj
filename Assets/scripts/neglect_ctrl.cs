@@ -14,11 +14,11 @@ public class neglect_ctrl : MonoBehaviour
         TimeSpan timeSpan = currentDateTime - closedDateTime;
         int savedData = (int)timeSpan.TotalSeconds;
 
-        Debug.Log("지나간 초 : " + savedData + " 초");
+        Debug.Log("지나간 초 : " + savedData + " 초 | 획득한 골드 : " + game_manager.play_stat.planet_force * savedData);
 
         // 데이터 설정
-
-
+        game_manager.play_data.basic_chaos_fragments += game_manager.play_stat.planet_force * savedData;
+        game_manager.Instance.SetMainUI();
         game_manager.Instance.save();
     }
 
@@ -39,8 +39,8 @@ public class neglect_ctrl : MonoBehaviour
     {
         while (true)
         {
-
-
+            game_manager.play_data.basic_chaos_fragments += game_manager.play_stat.planet_force;
+            game_manager.Instance.SetMainUI();
             yield return new WaitForSeconds(1f);
         }
     }
