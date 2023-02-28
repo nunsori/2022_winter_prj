@@ -23,10 +23,12 @@ public class planet_data
         "엘리시온은 이 우주에서 가장 성스러운 행성으로, 아무나 진입할 수 없는 초월적인 곳입니다. 천사족들 중에서도 가장 고결한 대천사들이 거주하는 행성으로, 불경한 자가 진입하려 할 시 성스러운 빛의 포격으로 흔적도 없이 소멸합니다. 이곳을 정복하면 이제 이 우주에는 더이상 카오스의 영향이 미치지 않는 곳이 없을 것입니다.",
     };
     public static int[] powers = { 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300 };
+    public static int[] golds = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 
     public Sprite sprite;
     public string name, info;
     public int power;
+    public int gold;
     public int code;
 
     public planet_data(int _code)
@@ -39,5 +41,6 @@ public class planet_data
         name = names[code];
         info = infos[code];
         power = powers[code];
+        gold = golds[code];
     }
 }
