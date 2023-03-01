@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
+using TMPro;
 
 public class game_manager : MonoBehaviour
 {
@@ -49,24 +50,10 @@ public class game_manager : MonoBehaviour
 
 
 
-
-    //creation panel 관련 변수
-
-    /*
+    //골드 크리스탈 관련 변수
+    // 0 - 골드 1 - 크리스탈
     [SerializeField]
-    public Button creation_start_btn;
-    [SerializeField]
-    public GameObject[] creation_table_slots;
-
-
-    [SerializeField]
-    private GameObject slot_parent;
-    private GameObject[] creation_inventory_slots;
-
-    [SerializeField]
-    public GameObject slot_pref;
-    [SerializeField]
-    public GameObject item_obj_pref;*/
+    private TextMeshProUGUI[] texts;
 
 
 
@@ -119,6 +106,8 @@ public class game_manager : MonoBehaviour
         
         
         only_one_arr_actvie(0, ui_obj);
+
+        update_src();
     }
 
     // Update is called once per frame
@@ -202,12 +191,12 @@ public class game_manager : MonoBehaviour
                 break;
 
             case ("contract_btn"):
-
+                StartCoroutine(set_active_delay(ui_obj[0], ui_animation_clips[0 * 2].length, false, 0));
                 //ui set active 와 기본 설정
 
 
                 //ui animation 재생
-
+                StartCoroutine(set_active_delay(ui_obj[2], ui_animation_clips[2 * 2 + 1].length, true, 2));
                 break;
 
             case ("dictionary_btn"):
@@ -329,5 +318,11 @@ public class game_manager : MonoBehaviour
             obj.GetComponent<Animator>().SetFloat("speed", 1f);
             obj.GetComponent<Animator>().Play(ui_animation_name[index * 2 + 1]);
         }
+    }
+
+    public void update_src()
+    {
+        texts[0].text = play_data.basic_chaos_fragments.ToString();
+        texts[1].text = play_data.basic_chaos_crystal.ToString();
     }
 }

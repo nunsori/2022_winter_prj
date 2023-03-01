@@ -17,13 +17,17 @@ public class player_data
     public int character_datas_pivot;
 
 
+    //max slots
+    public static int max_slot = 40;
+
+
     public player_data()
     {
         basic_chaos_fragments = 1000;
         basic_chaos_crystal = 1000;
 
-        item_Datas = new item_data[4];
-        character_Datas = new item_data[4];
+        item_Datas = new item_data[max_slot];
+        character_Datas = new item_data[max_slot];
 
         item_datas_pivot = 0;
         character_datas_pivot = 0;
