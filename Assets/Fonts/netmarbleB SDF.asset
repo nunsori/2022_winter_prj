@@ -954,6 +954,62 @@ MonoBehaviour:
     m_Unicode: 44284
     m_GlyphIndex: 1237
     m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 47560
+    m_GlyphIndex: 4513
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 47592
+    m_GlyphIndex: 4545
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 48373
+    m_GlyphIndex: 5326
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 49360
+    m_GlyphIndex: 6313
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 49457
+    m_GlyphIndex: 6410
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 50500
+    m_GlyphIndex: 7453
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 50640
+    m_GlyphIndex: 7593
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 50724
+    m_GlyphIndex: 7677
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 51060
+    m_GlyphIndex: 8013
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 51221
+    m_GlyphIndex: 8174
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 52972
+    m_GlyphIndex: 9925
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 53944
+    m_GlyphIndex: 10897
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 54620
+    m_GlyphIndex: 11573
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 54665
+    m_GlyphIndex: 11618
+    m_Scale: 1
   m_AtlasTextures:
   - {fileID: -186121704736954623}
   m_AtlasTextureIndex: 0
@@ -1532,6 +1588,36 @@ MonoBehaviour:
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
         m_GlyphIndex: 82
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 87
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -1.59375
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 68
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 87
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -1.59375
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 72
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0

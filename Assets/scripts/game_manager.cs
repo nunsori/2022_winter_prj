@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using System.IO;
+using System;
 using UnityEngine.UI;
 using TMPro;
 
 public class game_manager : MonoBehaviour
 {
     public static game_manager Instance;
+    public neglect_ctrl neglect_ctrl;
+    [SerializeField] private TMP_Text goldText;
 
     [Header("data_file")]
     //data_set
@@ -15,11 +19,12 @@ public class game_manager : MonoBehaviour
     [SerializeField]
     private string data_file_name;
 
-    //to json ÇÔ¼ö¿¡ ³ÖÀ» µ¥ÀÌÅÍ ÀÌ µ¥ÀÌÅÍ°¡ jsonÀ¸·Î µÈ´Ù.
+    //to json í•¨ìˆ˜ì— ë„£ì„ ë°ì´í„° ì´ ë°ì´í„°ê°€ jsonìœ¼ë¡œ ëœë‹¤.
     public static player_data play_data;
+    public static player_stat play_stat;
 
 
-    //data string temp µ¥ÀÌÅÍ ÀúÀå Àü, to jsonÀ¸·Î ³ª¿À´Â°Å ¹Ş´Â ¿ëµµ
+    //data string temp ë°ì´í„° ì €ì¥ ì „, to jsonìœ¼ë¡œ ë‚˜ì˜¤ëŠ”ê±° ë°›ëŠ” ìš©ë„
     private string data_string_temp;
 
 
@@ -38,7 +43,7 @@ public class game_manager : MonoBehaviour
     private AnimationClip[] ui_animation_clips;
 
     //private string[]
-    //ui panelµé
+    //ui panelë“¤
     /*
      * 0 - main
      * 1 - creation
@@ -48,15 +53,18 @@ public class game_manager : MonoBehaviour
     [SerializeField]
     private GameObject[] ui_obj;
 
+    private void OnApplicationQuit()
+    {
+        play_data.closeDate = DateTime.UtcNow.ToString();
+        save();
 
+        Debug.Log("ë°ì´í„° ì €ì¥ | UTC ì‹œê°„ : " + play_data.closeDate);
+    }
 
-    //°ñµå Å©¸®½ºÅ» °ü·Ã º¯¼ö
-    // 0 - °ñµå 1 - Å©¸®½ºÅ»
+    //ê³¨ë“œ í¬ë¦¬ìŠ¤íƒˆ ê´€ë ¨ ë³€ìˆ˜
+    // 0 - ê³¨ë“œ 1 - í¬ë¦¬ìŠ¤íƒˆ
     [SerializeField]
     private TextMeshProUGUI[] texts;
-
-
-
 
     private void Awake()
     {
@@ -96,6 +104,10 @@ public class game_manager : MonoBehaviour
 
     }
 
+    public void SetMainUI()
+    {
+        goldText.text = play_data.basic_chaos_fragments.ToString();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -107,6 +119,10 @@ public class game_manager : MonoBehaviour
         
         only_one_arr_actvie(0, ui_obj);
 
+        play_stat = new player_stat();
+        play_stat.SetData();
+        neglect_ctrl.Calculate_PastTime();
+        neglect_ctrl.Start_Neglect();
         update_src();
     }
 
@@ -146,6 +162,7 @@ public class game_manager : MonoBehaviour
         if (!File.Exists(data_path + data_file_name))
         {
             //make data file
+
             FileStream temp = File.Create(data_path + data_file_name);
 
             Debug.Log("data_json created");
@@ -165,7 +182,7 @@ public class game_manager : MonoBehaviour
 
     }
 
-    //uiÈ°¼ºÈ­ ÇÔ¼ö
+    //uií™œì„±í™” í•¨ìˆ˜
 
     public void main_menu_button_clicked(string btn_type)
     {
@@ -174,17 +191,17 @@ public class game_manager : MonoBehaviour
             case ("create_btn"):
                 //ui_animation_arr[]
                 StartCoroutine(set_active_delay(ui_obj[0], ui_animation_clips[0 * 2].length, false, 0));
-                //ui set active ¿Í ±âº» ¼³Á¤
+                //ui set active ì™€ ê¸°ë³¸ ì„¤ì •
                 
 
 
-                //ui animation Àç»ı
+                //ui animation ì¬ìƒ
                 ui_animation_arr[1].Play("creation_panel_in");
 
                 StartCoroutine(set_active_delay(ui_obj[1], ui_animation_clips[1 * 2 + 1].length, true, 1));
 
 
-                //ui ±âº» ¼¼ÆÃ ½ÇÇà
+                //ui ê¸°ë³¸ ì„¸íŒ… ì‹¤í–‰
                 creation_controller.Instance.check_creation_btn_interactive();
 
 
@@ -192,51 +209,51 @@ public class game_manager : MonoBehaviour
 
             case ("contract_btn"):
                 StartCoroutine(set_active_delay(ui_obj[0], ui_animation_clips[0 * 2].length, false, 0));
-                //ui set active ¿Í ±âº» ¼³Á¤
+                //ui set active ì™€ ê¸°ë³¸ ì„¤ì •
 
 
-                //ui animation Àç»ı
+                //ui animation ì¬ìƒ
                 StartCoroutine(set_active_delay(ui_obj[2], ui_animation_clips[2 * 2 + 1].length, true, 2));
                 break;
 
             case ("dictionary_btn"):
 
-                //ui set active ¿Í ±âº» ¼³Á¤
+                //ui set active ì™€ ê¸°ë³¸ ì„¤ì •
 
 
-                //ui animation Àç»ı
+                //ui animation ì¬ìƒ
 
                 break;
 
             case ("conquer"):
 
-                //ui set active ¿Í ±âº» ¼³Á¤
+                //ui set active ì™€ ê¸°ë³¸ ì„¤ì •
 
 
-                //ui animation Àç»ı
+                //ui animation ì¬ìƒ
 
                 break;
 
             case ("back_btn"):
 
-                //Áö±İ È°¼ºÈ­ µÇÀÖ´Â uiÃ£±â
+                //ì§€ê¸ˆ í™œì„±í™” ë˜ìˆëŠ” uiì°¾ê¸°
                 for (int i = 1; i < ui_obj.Length; i++)
                 {
                     if (ui_obj[i] != null &&ui_obj[i].activeSelf == true)
                     {
-                        //ÇØ´ç ÆĞ³Î ÅğÀå ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
-                        //³¡³¯¶§±îÁö ´ë±âÇÒ ¹æ¹ı ±¸¼º
+                        //í•´ë‹¹ íŒ¨ë„ í‡´ì¥ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+                        //ëë‚ ë•Œê¹Œì§€ ëŒ€ê¸°í•  ë°©ë²• êµ¬ì„±
                         //ui_animation_arr[i].SetFloat("speed", -1);
                         //ui_animation_arr[i].Play(ui_animation_name[i * 2 + 1]);
 
                         
                         
-                        //ui ºñÈ°¼ºÈ­
+                        //ui ë¹„í™œì„±í™”
                         
                         
                         //ui_obj[i].SetActive(false);
                         StartCoroutine(set_active_delay(ui_obj[i], ui_animation_clips[i * 2 + 1].length * 2f , false,i));
-                        //main È°¼ºÈ­
+                        //main í™œì„±í™”
                         //ui_obj[0].SetActive(true);
 
                         StartCoroutine(set_active_delay(ui_obj[0], ui_animation_clips[i * 2 + 1].length * 2f , true, 0));
@@ -247,7 +264,7 @@ public class game_manager : MonoBehaviour
 
                 
 
-                //main animÀç»ı
+                //main animì¬ìƒ
                 //ui_animation_arr[0].SetFloat("speed", 1f);
                 //ui_animation_arr[0].Play(ui_animation_name[1]);
 
