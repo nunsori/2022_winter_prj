@@ -18,7 +18,7 @@ public class neglect_ctrl : MonoBehaviour
 
         // 데이터 설정
         game_manager.play_data.basic_chaos_fragments += game_manager.play_stat.planet_force * savedData;
-        game_manager.Instance.SetMainUI();
+        game_manager.Instance.update_src();
         game_manager.Instance.save();
     }
 
@@ -40,7 +40,7 @@ public class neglect_ctrl : MonoBehaviour
         while (true)
         {
             game_manager.play_data.basic_chaos_fragments += game_manager.play_stat.planet_force;
-            game_manager.Instance.SetMainUI();
+            game_manager.Instance.update_src();
             yield return new WaitForSeconds(1f);
         }
     }

@@ -11,7 +11,6 @@ public class game_manager : MonoBehaviour
 {
     public static game_manager Instance;
     public neglect_ctrl neglect_ctrl;
-    [SerializeField] private TMP_Text goldText;
 
     [Header("data_file")]
     //data_set
@@ -104,18 +103,11 @@ public class game_manager : MonoBehaviour
 
     }
 
-    public void SetMainUI()
-    {
-        goldText.text = play_data.basic_chaos_fragments.ToString();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         //get_animation component
         //ui_animation_arr[0] = down
-        
-        
         
         only_one_arr_actvie(0, ui_obj);
 

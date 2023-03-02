@@ -46,6 +46,8 @@ public class player_data
 
     public player_data()
     {
+        isConquered_planets = new bool[data_pool.planetNum];
+
         basic_chaos_fragments = 1000;
         basic_chaos_crystal = 1000;
 
@@ -62,10 +64,5 @@ public class player_data
 
         item_datas_pivot = 0;
         character_datas_pivot = 0;
-    }
-
-    public player_data()
-    {
-        isConquered_planets = new bool[data_pool.planetNum];
     }
 }
