@@ -321,6 +321,52 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &49833851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 49833853}
+  - component: {fileID: 49833852}
+  m_Layer: 0
+  m_Name: save_
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &49833852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49833851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5302b2ab8349d00428158203dc75ee47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data_file_name: 
+  json_file_name: 
+--- !u!4 &49833853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49833851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 51.516598, y: 41.71395, z: -0.19052416}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &84495723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,6 +3040,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drag_parent: {fileID: 664423115}
   origin_parent: {fileID: 0}
+  item_Data:
+    code: 0
+    char_code: 0
+    item_name: 
+    character_name: 
+    character_status: 
+    character_script: []
+    _prefab: {fileID: 0}
 --- !u!1 &725870848
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,8 +3261,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 000000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bd8201eed38c8f547a4d48dab7eaf0d7, type: 2}
-  m_sharedMaterial: {fileID: 2509211004463195245, guid: bd8201eed38c8f547a4d48dab7eaf0d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3342,8 +3396,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC774\uB984"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bd8201eed38c8f547a4d48dab7eaf0d7, type: 2}
-  m_sharedMaterial: {fileID: 2509211004463195245, guid: bd8201eed38c8f547a4d48dab7eaf0d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5147,8 +5201,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 000000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bd8201eed38c8f547a4d48dab7eaf0d7, type: 2}
-  m_sharedMaterial: {fileID: 2509211004463195245, guid: bd8201eed38c8f547a4d48dab7eaf0d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7277,7 +7331,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neglect_ctrl: {fileID: 1598219692}
-  goldText: {fileID: 829338595}
   data_file_name: data_on
   down_buttion_set: {fileID: 0}
   ui_animation_arr:
@@ -7303,6 +7356,7 @@ MonoBehaviour:
   - {fileID: 1099365992}
   - {fileID: 1049583164}
   - {fileID: 0}
+  texts: []
 --- !u!4 &1598219691
 Transform:
   m_ObjectHideFlags: 0

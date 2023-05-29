@@ -57,6 +57,8 @@ public class game_manager : MonoBehaviour
         play_data.closeDate = DateTime.UtcNow.ToString();
         save();
 
+
+        
         Debug.Log("데이터 저장 | UTC 시간 : " + play_data.closeDate);
     }
 
@@ -77,6 +79,8 @@ public class game_manager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        
 
         //set data_path
         data_path = Application.persistentDataPath + "/data/";
@@ -140,6 +144,7 @@ public class game_manager : MonoBehaviour
 
     void load_data()
     {
+        
         //if file does not exist
         if (!File.Exists(data_path))
         {
